@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP Request Tester</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .request-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .button:hover { background-color: #45a049; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>HTTP Request Tester</h1>
+    
+    <div class="request-section">
+        <h2>GET Request</h2>
+        <p>Test GET request bằng cách truy cập trực tiếp URL:</p>
+        <a href="/" class="button">Trang chủ (GET /)</a>
+    </div>
+
+    <div class="request-section">
+        <h2>POST Request</h2>
+        <p>Test POST request bằng form:</p>
+        <form action="/" method="POST">
+            <div style="margin-bottom: 10px;">
+                <label for="name">Tên:</label><br>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label for="message">Nội dung:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <input type="submit" value="Gửi POST Request" class="button">
+        </form>
+    </div>
+
+    <div class="request-section">
+        <h2>HEAD Request</h2>
+        <p>Test HEAD request (chỉ nhận headers):</p>
+        <button onclick="sendHeadRequest()" class="button">Gửi HEAD Request</button>
+        <div id="headResult" style="margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        async function sendHeadRequest() {
+            try {
+                const response = await fetch('/', { method: 'HEAD' });
+                const headers = Array.from(response.headers.entries())
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join('\n');
+                document.getElementById('headResult').innerHTML = 
+                    `<pre>${headers}</pre>`;
+            } catch (error) {
+                document.getElementById('headResult').innerHTML = 
+                    `<p style="color: red;">Lỗi: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

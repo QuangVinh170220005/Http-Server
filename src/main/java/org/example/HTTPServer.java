@@ -14,7 +14,6 @@ public class HTTPServer {
             System.out.println("========================================");
             System.out.println("HTTP Server đang chạy ở port " + PORT);
             System.out.println("========================================");
-            System.out.println("Test với Postman:");
             System.out.println("  GET:  http://localhost:8080/");
             System.out.println("  HEAD: http://localhost:8080/info");
             System.out.println("  POST: http://localhost:8080/submit");
